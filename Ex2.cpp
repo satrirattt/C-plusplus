@@ -4,18 +4,14 @@ using namespace std;
 int main()
 {	
 	string Name;
-	float W;
-	float H;
+	int Year;
 	cout << "Enter Name : " ;
 	cin >> Name ;
-	cout << "Enter Weight : " ;
-	cin >>  W ;
-	cout << "Enter High : " ;
-	cin >>  H;
-	cout << "********Output********\n" ;
-	cout << "BMI = " << W / (H/100 * H/100) <<endl ;
+	cout << "Enter Year of  birth : " ;
+	cin >> Year ;
+	cout << "\nYour Age = " << 2566 - Year << " years old. " <<endl ;
 
-	system("pause");
+	
 	return (0);
 
 }

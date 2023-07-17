@@ -12,6 +12,7 @@ int main()
     cin >>  W ;
     cout << "Enter Height : " ;
     cin >>  H;
+	cout <<"********Output********\n";
     cout << "BMI = " << W / (H/100 * H/100) <<endl ;
 
    

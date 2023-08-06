@@ -15,16 +15,16 @@ int main()
 	}
 		
 	else if (a == 'B')
-	{	t+=10;
+	{	t+=20;
 		B += 20;
 	}
 	else if (a == 'C')
-	{	t+= 10;
+	{	t+= 30;
 		C +=30;
 
 	}
 
-	cout << "AEnter Character (A,B,C) : " ;
+	cout << "Enter Character (A,B,C) : " ;
 	cin >> b ;
 	if (b == 'A')
 	{	t +=10 ;
@@ -32,16 +32,16 @@ int main()
 	}
 		
 	else if (b == 'B')
-	{	t+=10;
+	{	t+=20;
 		B += 20;
 	}
 	else if (b == 'C')
-	{	t+= 10;
+	{	t+= 30;
 		C +=30;
 
 	}
 
-	cout << "BEnter Character (A,B,C) : " ;
+	cout << "Enter Character (A,B,C) : " ;
 	cin >> c ;
 	if (c == 'A')
 	{	t +=10 ;
@@ -49,17 +49,29 @@ int main()
 	}
 		
 	else if (c == 'B')
-	{	t+=10;
+	{	t+=20;
 		B += 20;
 	}
 	else if (c == 'C')
-	{	t+= 10;
+	{	t+= 30;
 		C +=30;
 
 	}
 
-	cout << "A = " << A << " , B = " << B << " , C = " << C << endl;
-    cout << "A + B + C = " << A << " + " << B << " + " << C << " = " << t << endl;
+	//ออก ex.A = 10 , B = 20 , C = 30
+    cout << ((a == 'A') ? "A = 10" : (a == 'B') ? "B = 20" : "C = 30") << " , ";
+    cout << ((b == 'A') ? "A = 10" : (b == 'B') ? "B = 20" : "C = 30") << " , ";
+    cout << ((c == 'A') ? "A = 10" : (c == 'B') ? "B = 20" : "C = 30") << endl;
+    
+	//ออก ex. A + A + A =
+	cout << ((a == 'A') ? "A" : (a == 'B') ? "B" : "C") << " + ";
+    cout << ((b == 'A') ? "A" : (b == 'B') ? "B" : "C") << " + ";
+    cout << ((c == 'A') ? "A" : (c == 'B') ? "B" : "C") << " = ";
+
+	//ออก ex. 10 + 10 + 10 =3
+	cout << ((a == 'A') ? "10" : (a == 'B') ? "20" : "30") << " + ";
+    cout << ((b == 'A') ? "10" : (b == 'B') ? "20" : "30") << " + ";
+    cout << ((c == 'A') ? "10" : (c == 'B') ? "20" : "30") << " = " << t << endl;
 	
 	return(0);
 }

@@ -19,7 +19,7 @@ int main()
 			else if (Ch == '2') CalRec();
 				else if (Ch == '3') cout << "Exit" <<endl;
 					else cout <<"Wrong Menu" <<endl;
-	}while(Ch !=3);
+	}while(Ch != '3');
 	system("pause");
 	return(0);
 }

@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <string>
 using namespace std;
-void check_result(int x);
+string check_result(int x);
 int main()
 {
 	int num[4], total = 0, avg = 0,max = 0,min;
@@ -20,8 +20,7 @@ int main()
 	cout << "------------------------------------------"<<endl;
 	min = num[0] ; 
 	for (int i = 0; i < 4; i++)//i<=3 display array
-	{	cout <<" " << name[i] <<"\t\t"<<num[i]<<"\t\t" ;
-		check_result(num[i]);
+	{	cout <<" " << name[i] <<"\t\t"<<num[i]<<"\t\t"<<check_result(num[i])<<endl ;
 		total = total + num[i];
 		if(num[i] > max)
 			max = num[i];
@@ -39,11 +38,13 @@ int main()
 	system("pause");
 	return(0);
 }
-void check_result(int x)
+string check_result(int x)
 {
 	if(x > 49)
-		cout<<"Pass"<<endl;
+		return("Pass");
 	else
-		cout<<"Failed"<<endl;
+		return("Failed");
+
+
 
 }

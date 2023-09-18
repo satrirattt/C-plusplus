@@ -4,7 +4,7 @@
 using namespace std;
 int main()
 {
-	int num[4], total = 0, avg = 0,max = 0;
+	int num[4], total = 0, avg = 0,max = 0,min;
 	string name[4];
 	for (int i = 0; i < 4; i++)//i<=3 input array
 	{	cout<<"Enter name ["<<i<<"] : " ;
@@ -17,14 +17,19 @@ int main()
 	cout << "---------------------"<<endl;
 	cout << " Name         Score" <<endl;
 	cout << "---------------------"<<endl;
+	min = num[0] ; 
 	for (int i = 0; i < 4; i++)//i<=3 display array
 	{	cout <<" " << name[i] <<"\t\t"<<num[i] <<endl;
 		total = total + num[i];
 		if(num[i] > max)
 			max = num[i];
+		if(num[i] < min)
+			min = num[i];
+
 	}
 	cout << "---------------------"<<endl;//setfill('-')<<setw(30)
 	cout<<"Max score = " <<max<<endl;
+	cout<<"Min score = " <<min<<endl;
 	cout<<"Total = " <<total<<endl;
 	cout<<"Average = "<<(float)total/4<<endl;
 	

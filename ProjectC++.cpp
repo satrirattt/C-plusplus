@@ -17,6 +17,7 @@ struct Patient {
     string lastName;
     Treatment treatments[100];
     int treatmentCount;
+    
 };
 
 struct TreatmentDetail {
@@ -26,6 +27,7 @@ struct TreatmentDetail {
 };
 
 TreatmentDetail treatmentDetails[5];
+
 
 void initializeTreatmentDetails() {
     treatmentDetails[0] = { 1, "Scaling", 200.00 }; //ขูดหินปูน
@@ -102,6 +104,7 @@ void enterTreatmentDetail(Patient patients[], int patientCount) {
 
             int selectedService;
             double totalCost = 0.0;
+            
 
             cout << "Date (dd/mm/yy): ";
             cin >> patients[i].treatments[patients[i].treatmentCount].date;  // Ask for date for each treatment
@@ -121,7 +124,7 @@ void enterTreatmentDetail(Patient patients[], int patientCount) {
                     patients[i].treatments[patients[i].treatmentCount].procedure = treatmentDetails[selectedService - 1].procedure;
                     patients[i].treatments[patients[i].treatmentCount].cost = treatmentDetails[selectedService - 1].cost;
 
-                    
+
 
                     patients[i].treatmentCount++;
                     totalCost += treatmentDetails[selectedService - 1].cost;
@@ -140,18 +143,16 @@ void enterTreatmentDetail(Patient patients[], int patientCount) {
     }
 }
 
+
+
 void enterTreatmentReport(Patient patients[], int patientCount) {
-    int patientId;
-    cout << "Enter ID: ";
-    cin >> patientId;
-    cout << endl;
-    bool found = false;
+    double totalRevence = 0.0;
 
     for (int i = 0; i < patientCount; i++) {
-        if (patients[i].id == patientId) {
-            found = true;
-            double totalCost = 0.0;
+        double patientTotalCost = 0.0;
 
+            cout << "Patient ID : " << patients[i].id << endl;
+           
             cout << "--------------------------------------------------------------------------" << endl;
             cout << "|                 THE TREATMENT HISTORY OF " << patients[i].firstName << " " << patients[i].lastName << "               |" << endl;
             cout << "--------------------------------------------------------------------------" << endl;
@@ -163,20 +164,21 @@ void enterTreatmentReport(Patient patients[], int patientCount) {
                 cout << " |   " << left << setfill(' ') << setw(10) << patients[i].treatments[j].date;
                 cout << " |    " << left << setfill(' ') << setw(20) << patients[i].treatments[j].procedure;
                 cout << " | " << fixed << setprecision(2) << setfill(' ') << setw(10) << right << patients[i].treatments[j].cost << "   |" << endl;
-                totalCost += patients[i].treatments[j].cost;
+                patientTotalCost += patients[i].treatments[j].cost;
+                cout << endl;
+                
             }
 
             cout << "--------------------------------------------------------------------------" << endl;
-            cout << "| TOTAL :                                    " << fixed << setprecision(2) << setfill(' ') << setw(25) << totalCost << "   |" << endl;
+            cout << "| TOTAL :                                    " << fixed << setprecision(2) << setfill(' ') << setw(25) << patientTotalCost  << "   |" << endl;
             cout << "--------------------------------------------------------------------------" << endl;
+            cout << endl;
+            totalRevence += patientTotalCost;
         }
         cout << endl;
     }
 
-    if (!found) {
-        cout << "Patient with ID " << patientId << " not found." << endl;
-    }
-}
+    
 
 int main() {
     Patient patients[100];
@@ -225,7 +227,7 @@ int main() {
                     break;
 
                 case 0:
-                    
+
                     break;
 
                 default:

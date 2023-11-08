@@ -28,11 +28,11 @@ struct TreatmentDetail {
 TreatmentDetail treatmentDetails[5];
 
 void initializeTreatmentDetails() {
-    treatmentDetails[0] = { 1, "Scaling", 200.00 };
-    treatmentDetails[1] = { 2, "Tooth Extraction", 500.00 };
-    treatmentDetails[2] = { 3, "Root Canal Treatment", 25000.00 };
-    treatmentDetails[3] = { 4, "Dental Crown", 1000.00 };
-    treatmentDetails[4] = { 5, "Orthodontic Braces", 500.00 };
+    treatmentDetails[0] = { 1, "Scaling", 200.00 }; //ขูดหินปูน
+    treatmentDetails[1] = { 2, "Tooth Extraction", 500.00 }; //ถอนฟัน
+    treatmentDetails[2] = { 3, "Root Canal Treatment", 25000.00 }; //รักษารากฟัน
+    treatmentDetails[3] = { 4, "Dental Crown", 1000.00 }; //พิมพ์ฟัน
+    treatmentDetails[4] = { 5, "X-ray Tooth", 500.00 }; //เอกเซรย์ฟัน
 }
 
 void registerPatient(Patient patients[], int& patientCount) {
@@ -64,6 +64,7 @@ void enterTreatmentData(Patient patients[], int patientCount) {
         }
     }
 
+
     if (!found) {
         cout << "Patient with ID " << patientId << " not found." << endl;
     }
@@ -73,39 +74,43 @@ void enterTreatmentDetail(Patient patients[], int patientCount) {
     int patientId;
     cout << "Enter ID: ";
     cin >> patientId;
+    cout << endl;
     bool found = false;
 
     for (int i = 0; i < patientCount; i++) {
         if (patients[i].id == patientId) {
-            cout << "-------------------------------------------------------------------------" << endl;
-            cout << "|                      THE TREATMENT HISTORY OF " << patients[i].firstName << " " << patients[i].lastName << "             |" << endl;
             cout << "--------------------------------------------------------------------------" << endl;
-            cout << "|    THE TIME    |    DATE     |       MAKE A LIST       |  PRICE(BATH)  |" << endl;
+            cout << "|                 THE TREATMENT HISTORY OF " << patients[i].firstName << " " << patients[i].lastName << "               |" << endl;
+            cout << "--------------------------------------------------------------------------" << endl;
+            cout << "|       NO.      |    DATE      |       MAKE A LIST       |  PRICE(BATH) |" << endl;
             cout << "--------------------------------------------------------------------------" << endl;
 
             for (int j = 0; j < patients[i].treatmentCount; j++) {
-                cout << "|       " << left << patients[i].treatments[j].treatmentNumber;
-                cout << "        |   " << left << patients[i].treatments[j].date;
-                cout << "  |    " << left << patients[i].treatments[j].procedure;
-                cout << "  |    " << fixed << setprecision(2) << right << patients[i].treatments[j].cost << "     |" << endl;
+                cout << "|       " << left << setfill(' ') << setw(8) << patients[i].treatments[j].treatmentNumber;
+                cout << " |   " << left << setfill(' ') << setw(10) << patients[i].treatments[j].date;
+                cout << " |    " << left << setfill(' ') << setw(20) << patients[i].treatments[j].procedure;
+                cout << " | " << fixed << setprecision(2) << setfill(' ') << setw(10) << right << patients[i].treatments[j].cost << "   |" << endl;
             }
 
             cout << "--------------------------------------------------------------------------" << endl;
+            cout << endl;
 
             if (patients[i].treatmentCount < 100) {
                 Treatment newTreatment;
-                
-
                 patients[i].treatments[patients[i].treatmentCount] = newTreatment;
             }
 
             int selectedService;
             double totalCost = 0.0;
 
+            cout << "Date (dd/mm/yy): ";
+            cin >> patients[i].treatments[patients[i].treatmentCount].date;  // Ask for date for each treatment
+            cout << endl;
             cout << "DENTAL ITEMS" << endl;
             for (int k = 0; k < 5; k++) {
                 cout << k + 1 << ". " << treatmentDetails[k].procedure << " " << treatmentDetails[k].cost << " BATH " << endl;
             }
+
 
             do {
                 cout << "Service (0 to finish) : ";
@@ -116,15 +121,14 @@ void enterTreatmentDetail(Patient patients[], int patientCount) {
                     patients[i].treatments[patients[i].treatmentCount].procedure = treatmentDetails[selectedService - 1].procedure;
                     patients[i].treatments[patients[i].treatmentCount].cost = treatmentDetails[selectedService - 1].cost;
 
-                    cout << "Date (dd/mm/yy): ";
-                    cin >> patients[i].treatments[patients[i].treatmentCount].date;  // Ask for date for each treatment
+                    
 
                     patients[i].treatmentCount++;
                     totalCost += treatmentDetails[selectedService - 1].cost;
                 }
             } while (selectedService != 0);
 
-            cout << " TOTAL : " << totalCost << " BATH " << endl;
+            cout << "TOTAL : " << totalCost << " BATH " << endl;
 
             found = true;
             break;
@@ -140,6 +144,7 @@ void enterTreatmentReport(Patient patients[], int patientCount) {
     int patientId;
     cout << "Enter ID: ";
     cin >> patientId;
+    cout << endl;
     bool found = false;
 
     for (int i = 0; i < patientCount; i++) {
@@ -147,24 +152,25 @@ void enterTreatmentReport(Patient patients[], int patientCount) {
             found = true;
             double totalCost = 0.0;
 
-            cout << "-------------------------------------------------------------------------" << endl;
-            cout << "|                      THE TREATMENT HISTORY OF " << patients[i].firstName << " " << patients[i].lastName << "             |" << endl;
             cout << "--------------------------------------------------------------------------" << endl;
-            cout << "|    THE TIME    |    DATE     |       MAKE A LIST       |  PRICE(BATH)  |" << endl;
+            cout << "|                 THE TREATMENT HISTORY OF " << patients[i].firstName << " " << patients[i].lastName << "               |" << endl;
+            cout << "--------------------------------------------------------------------------" << endl;
+            cout << "|       NO.      |    DATE      |       MAKE A LIST       |  PRICE(BATH) |" << endl;
             cout << "--------------------------------------------------------------------------" << endl;
 
             for (int j = 0; j < patients[i].treatmentCount; j++) {
-                cout << "|       " << left << patients[i].treatments[j].treatmentNumber;
-                cout << "        |   " << left << patients[i].treatments[j].date;
-                cout << "  |    " << left << patients[i].treatments[j].procedure;
-                cout << " |    " << fixed << setprecision(2) << right << patients[i].treatments[j].cost << "   |" << endl;
+                cout << "|       " << left << setfill(' ') << setw(8) << patients[i].treatments[j].treatmentNumber;
+                cout << " |   " << left << setfill(' ') << setw(10) << patients[i].treatments[j].date;
+                cout << " |    " << left << setfill(' ') << setw(20) << patients[i].treatments[j].procedure;
+                cout << " | " << fixed << setprecision(2) << setfill(' ') << setw(10) << right << patients[i].treatments[j].cost << "   |" << endl;
                 totalCost += patients[i].treatments[j].cost;
             }
 
-            cout << "----------------------------------------------------------------" << endl;
-            cout << "| TOTAL :                             " << totalCost << " BATH |" << endl;
-            cout << "----------------------------------------------------------------" << endl;
+            cout << "--------------------------------------------------------------------------" << endl;
+            cout << "| TOTAL :                                    " << fixed << setprecision(2) << setfill(' ') << setw(25) << totalCost << "   |" << endl;
+            cout << "--------------------------------------------------------------------------" << endl;
         }
+        cout << endl;
     }
 
     if (!found) {
@@ -181,13 +187,13 @@ int main() {
     initializeTreatmentDetails();
 
     do {
-        cout << setfill('=') << setw(30) << "" << endl;
-        cout << "  Clinic Smilelyyy Yimsuyyy  " << endl;
-        cout << "        ยินดีต้อนรับ " << endl;
-        cout << setfill('-') << setw(30) << "" << endl;
-        cout << "           MENU          " << endl;
-        cout << setfill('-') << setw(30) << "" << endl;
-        cout << setfill('=') << setw(30) << "" << endl;
+        cout << "<<<<<<<<<<<>>>>>>>>>>>>>" << endl;
+        cout << "<   Clinic Smilelyyy   >" << endl;
+        cout << "<        Welcome       >" << endl;
+        cout << "<---------------------->" << endl;
+        cout << "<         MENU         >" << endl;
+        cout << "<<<<<<<<<<<>>>>>>>>>>>>>" << endl;
+        cout << endl;
         cout << "1. Check history" << endl;
         cout << "2. Treatment data" << endl;
         cout << "3. Report" << endl;
@@ -198,6 +204,11 @@ int main() {
         switch (choice) {
         case 1:
             do {
+                cout << endl;
+                cout << "<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << endl;
+                cout << "<	1.Check history         >" << endl;
+                cout << "<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << endl;
+                cout << endl;
                 cout << "1. Register" << endl;
                 cout << "2. Enter ID" << endl;
                 cout << "0. Exit" << endl;
@@ -214,7 +225,7 @@ int main() {
                     break;
 
                 case 0:
-                    cout << "Exit" << endl;
+                    
                     break;
 
                 default:
@@ -226,15 +237,27 @@ int main() {
             break;
 
         case 2:
+            cout << endl;
+            cout << "<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << endl;
+            cout << "<	2.Treatment data        >" << endl;
+            cout << "<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << endl;
+            cout << endl;
             enterTreatmentDetail(patients, patientCount);
+            cout << endl;
             break;
 
         case 3:
+            cout << endl;
+            cout << "<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << endl;
+            cout << "<	     3.Report           >" << endl;
+            cout << "<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << endl;
+            cout << endl;
             enterTreatmentReport(patients, patientCount);
+            cout << endl;
             break;
 
         case 4:
-            cout << "Exit..." << endl;
+            cout << "Exit Program." << endl;
             break;
 
         default:
